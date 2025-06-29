@@ -1,0 +1,126 @@
+task_setup_phase_side_view:
+  description: >
+    - Conduct a thorough evaluation of the form and technique used in the deadlift from a side-view camera.
+    - Analyse the joint angles and joint distances provided in the KNOWLEDGE BASE.
+    - Definitions of metrics are also provided in the KNOWLEDGE BASE.
+    - Evaluate and interpret joint angles and their significance in the deadlift movement. The evaluation should only include the setup, liftoff, and initial pull phases.
+    - Summarizing the most important findings and corrections for the setup phase (side view).
+
+    - Return a detailed JSON list of 3 bullet points, each with a 'checkpoint', 'metric', 'observation', and 'recommendation' field
+    - From a sagittal view you should not return any observations related to frontal plane asymmetries or joint distances. These metrics are not available in the side view.
+    - Slight variations in metrics should be expected since data is captured from YOLO model inference
+  expected_output: >
+    [
+      ("checkpoint": ..., "metric": ..., "observation": ..., "recommendation": ...),
+      ... (3 items)
+    ]
+  agent: deadlift_setup_trainer
+
+
+
+task_setup_phase_front_view:
+  description: >
+    - Conduct a thorough evaluation of the form and technique used in the deadlift from a frontal-view camera.
+    - Analyse the joint angles and joint distances provided in the KNOWLEDGE BASE.
+    - Definitions of metrics are also provided in the KNOWLEDGE BASE.
+    - Evaluate and interpret the inter-joint distances and slopes and their significance in the deadlift movement. The evaluation should only include the setup, liftoff, and initial pull phases.
+    - Summarizing the most important findings and corrections for the setup phase (frontal view).
+
+    - Return a detailed JSON list of 3 bullet points, each with a 'checkpoint', 'metric', 'observation', and 'recommendation' field
+    - From the frontal view you should not return any observations related to joint angles. These metrics are not available in the frontal view.
+    - Slight variations in metrics should be expected since data is captured from YOLO model inference
+  expected_output: >
+    [
+      ("checkpoint": ..., "metric": ..., "observation": ..., "recommendation": ...),
+      ... (3 items)
+    ]
+  agent: deadlift_setup_trainer
+
+
+task_pull_phase_side_view:
+  description: >
+    - Conduct a thorough evaluation of the form and technique used in the deadlift from a side-view camera.
+    - Analyse the joint angles and joint distances provided in the KNOWLEDGE BASE.
+    - Definitions of metrics are also provided in the KNOWLEDGE BASE.
+    - Evaluate and interpret joint angles and their significance in the deadlift movement. The evaluation should only include the pull phase until the lift finishes at full extension.
+    - Summarizing the most important findings and corrections for the pull phase (side view).
+
+    - Return a detailed JSON list of 4 bullet points, each with a 'checkpoint', 'metric', 'observation', and 'recommendation' field
+    - From a sagittal view you should not return any observations related to frontal plane asymmetries or joint distances. These metrics are not available from side view.
+    - Slight variations in metrics should be expected since data is captured from YOLO model inference
+  expected_output: >
+    (
+      ("checkpoint": ..., "metric": ..., "observation": ..., "recommendation": ...),
+      ... (4 items)
+    )
+  agent: deadlift_pull_trainer
+
+
+
+task_pull_phase_front_view:
+  description: >
+    - Conduct a thorough evaluation of the form and technique used in the deadlift from a side-view camera.
+    - Analyse the joint angles and joint distances provided in the KNOWLEDGE BASE.
+    - Definitions of metrics are also provided in the KNOWLEDGE BASE.
+    - Evaluate and interpret the inter-joint distances and slopes and their significance in the deadlift movement. The evaluation should only include the pull phase until the lift finishes at full extension.
+    - Summarizing the most important findings and corrections for the pull phase (frontal view).
+
+    - Return a detailed JSON list of 4 bullet points, each with a 'checkpoint', 'metric', 'observation', and 'recommendation' field
+    - From the frontal view you should not return any observations related to joint angles. These metrics are not available in the frontal view.
+    - Slight variations in metrics should be expected since data is captured from YOLO model inference
+  expected_output: >
+    (
+      ("checkpoint": ..., "metric": ..., "observation": ..., "recommendation": ...),
+      ... (4 items)
+    )
+  agent: deadlift_pull_trainer
+
+
+
+task_orchestration_report:
+  description: >
+    First verify then combine the feedback and findings from the setup and pull phase agents filtering their findings for the most impactful feedback.
+    {combined_phase_summary}
+    Definitions of metrics are also provided in the KNOWLEDGE BASE.
+    Synthesize their outputs into a single, structured markdown report suitable for rendering in a Streamlit application.
+    The report should include:
+      - An executive summary of the overall deadlift performance.
+      - Areas for improvement, grouped by phase (setup, pull, overall).
+      - Specific, actionable recommendations for technique and injury prevention. 
+      - Optional: Suggestions for accessory exercises to address limiting factors.
+      
+    - Use clear markdown formatting with headings, bullet points, and sections for easy readability.
+    - Use clear and interpretable language that is in line with the expectations of physical trainer or lifting coach to understand and communicate to a client.
+    - Do not include a section of the output that is not relevant to the deadlift.
+    - Do not include a section of the output if there are no relevant findings.
+    - If there are no relevant findings for any section, explicitly state "This part of the movement looks good." Do not invent or fabricate findings to fill gaps.
+    - The "Accessory Exercise Suggestions" section is optional. Only include this section if there are specific limiting factors identified and relevant suggestions can be made.
+  expected_output: |
+    ## Deadlift Analysis Report
+
+    **Movement Summary:**  
+    (summary)
+
+    ### Areas for Improvement
+
+    **Setup Phase**
+    - (setup_issue_1)
+    - (setup_issue_2)
+    ...
+
+    **Pull Phase**
+    - (pull_issue_1)
+    - (pull_issue_2)
+    ...
+
+    **Overall Recommendations**
+    - (recommendation_1)
+    - (recommendation_2)
+    ...
+
+    ### Accessory Exercise Suggestions
+    - (exercise_1)
+    - (exercise_2)
+    ...
+
+  agent: orchestration_deadlift_physical_trainer

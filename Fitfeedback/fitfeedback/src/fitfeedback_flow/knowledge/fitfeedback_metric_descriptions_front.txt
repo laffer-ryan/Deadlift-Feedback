@@ -1,0 +1,56 @@
+FitFeedback Metric Descriptions
+==============================
+
+FRONT VIEW METRICS
+------------------
+
+- left_to_right_shoulder_slope:
+  - Calculation: Slope of the line connecting the left and right shoulders (dy/dx).
+  - Interpretation: Slope should be close to 0. Large deviations: head tilted in one direction.
+
+- left_right_wrist_slope:
+  - Calculation: Slope of the line connecting the left and right wrists (dy/dx).
+  - Interpretation: Slope should be close to 0. Large deviations: head tilted in one direction.
+
+- head_tilt_slope:
+  - Calculation: Slope of the line connecting the left and right eyes (dy/dx), using YOLO coordinate system.
+  - Interpretation: Slope should be close to 0. Large deviations: head tilted in one direction.
+
+- normalised_wrist_difference:
+  - Calculation: Distance between left and right wrists, divided by hip width.
+  - Interpretation: Should be close to shoulder width. Too small/large may indicate improper grip width or bar path.
+
+- normalised_ankle_difference:
+  - Calculation: Distance between left and right ankles, divided by hip width.
+  - Interpretation: Should be close to 1 (hip width) and should not be larger than normalised_shoulder_distance. Large deviations: stance too wide/narrow.
+
+- normalised_shoulder_distance:
+  - Calculation: Distance between left and right shoulders, divided by hip width.
+  - Interpretation: Used as a reference for other normalised distances. Shoulder distances itself can not be altered.
+
+- normalised_knee_distance:
+  - Calculation: Distance between left and right knees, divided by hip width.
+  - Interpretation: Assesses knee tracking and stance width.
+
+- right_knee_lateral_distance_from_center / left_knee_lateral_distance_from_center:
+  - Calculation: Horizontal distance from each knee to mid-hip, divided by hip width.
+  - Interpretation: Asymmetry may indicate weight shift or compensation. 
+
+- right_ankle_lateral_distance_from_center / left_ankle_lateral_distance_from_center:
+  - Calculation: Horizontal distance from each ankle to mid-hip, divided by hip width.
+  - Interpretation: Asymmetry may indicate stance imbalance.
+
+- right_wrist_lateral_distance_from_center / left_wrist_lateral_distance_from_center:
+  - Calculation: Horizontal distance from each wrist to mid-hip, divided by hip width.
+  - Interpretation: Asymmetry may indicate uneven grip or bar path.
+
+
+
+NOTES
+-----
+- "Normalised" means divided by hip width for scale invariance.
+- Normalised metrics are compared against other normalised metrics for stance widths (e.g. normalised_ankle_difference should be the same or slightly larger than 1)
+- Lateral distances from center assess symmetry and compensation. Slight variations are acceptable due to YOLO Pose computer vision.
+- Deviations from ideal values may indicate technique faults, compensation, or risk of injury.
+- A slope of 0 indicates level and symmetrical joint slopes. A **negative slope** means the right joint is **higher** than the left; a **positive slope** means the right joint is **lower**. Large deviations may reflect joint asymmetry or compensation at setup.
+- Calculations are in pixels and not a specific unit measurements. Therefore, they can not be interpreted as such for recommendations. They should be used in comparison with other body parts.

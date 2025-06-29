@@ -1,0 +1,45 @@
+FitFeedback Metric Descriptions
+==============================
+
+
+SIDE VIEW METRICS (LEFT or RIGHT)
+---------------------------------
+
+- bar_distance_from_body (left/right):
+  - Calculation: Perpendicular distance from the wrist to the line between the ankle and knee on the same side.
+  - Interpretation: Measures barbell proximity to the shin. Low, stable values indicate efficient bar path; large or increasing values suggest bar drift and potential form breakdown.
+
+- elbow_angle (left/right):
+  - Calculation: Angle at the elbow between wrist, elbow, and shoulder.
+  - Interpretation: Should remain relatively constant. Large changes may indicate arm pulling or loss of tension.
+
+- lower_wrist_angle (left/right):
+  - Calculation: Angle at the wrist between ankle, wrist, and hip.
+  - Interpretation: Assesses wrist position relative to lower body; deviations may indicate poor bar path or grip.
+
+- upper_wrist_angle (left/right):
+  - Calculation: Angle at the wrist between shoulder, wrist, and hip.
+  - Interpretation: Assesses wrist position relative to upper body.
+
+- neck_angle (left/right):
+  - Calculation: Angle at the shoulder between nose, shoulder, and hip.
+  - Interpretation: Should remain neutral. Deviations may indicate head/neck misalignment.
+
+- posterior_chain (left/right):
+  - Calculation: Angle at the hip between shoulder, hip, and ankle.
+  - Interpretation: Indicates hip hinge and torso angle. Large deviations may indicate rounding or excessive extension.
+
+- knee_angle (left/right):
+  - Calculation: Angle at the knee between ankle, knee, and hip.
+  - Interpretation: Should not drop below 90°. This should be compared to the hip angle to get correct timing of movement.
+
+- hip_angle (left/right):
+  - Calculation: Angle at the hip between knee, hip, and shoulder.
+  - Interpretation: Assesses hip extension and torso position. Deviations may indicate early hip rise or poor lockout.
+
+NOTES
+-----
+- Lateral distances from center assess symmetry and compensation. Slight variations are acceptable due to YOLO Pose computer vision.
+- Deviations from ideal values may indicate technique faults, compensation, or risk of injury.
+- A slope of 0 indicates level and symmetrical joint slopes. A **negative slope** means the right joint is **higher** than the left; a **positive slope** means the right joint is **lower**. Large deviations may reflect joint asymmetry or compensation at setup.
+- Calculations are in pixels and not a specific unit measurements. Therefore, they can not be interpreted as such for recommendations. They should be used in comparison with other body parts.

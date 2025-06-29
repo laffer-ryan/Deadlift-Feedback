@@ -218,3 +218,4 @@ Test
 *images
 *.ipynb
 rename_file.py
+yolo11m-pose.pt
